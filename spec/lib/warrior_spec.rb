@@ -9,7 +9,7 @@ describe Warrior do
       expect(w.armor).to eq 25
       expect(w.dmg).to eq 25
       expect(w.name).to eq "Warrior"
-      expect(w.crit).to eq [125,0,0,0]
+      expect(w.crit ).to eq [125,0,0,0]
     end
   end
 end

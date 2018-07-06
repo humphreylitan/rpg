@@ -10,48 +10,20 @@ class Arena
     puts "#{hero2.name} (HP: #{hero2.hp}, Armor: #{hero2.armor}, Damage: #{hero2.dmg})"
     puts ""
 
-    case mode
-    when "death_match"
-      Mode.death_match(hero1, hero2)
-    when "turn_based"
-      Mode.turn_based(hero1, hero2)
-    end
+
+    mode.run(hero1,hero2)
 
     puts ""
   end
 end
 
 class Mode
-  def self.death_match(x,y)
-  # Whoever dies first loses
 
-    while (x.hp > 0) & (y.hp > 0)
-      a = [x,y].shuffle
-      attack(a[0],a[1])
-    end
-
-    winner(a[0],a[1])
-  end
-
-  def self.turn_based(x, y)
-  # Whoever has the highest HP after x number of turns wins. If someone dies before the final turn, the game shall end with the survivor being the winner.
-
-    ind = 1
-    no_of_turns = gets.chomp.to_i
-    turns = no_of_turns +1
-
-    puts ""
-
-    while (ind < turns) & ((x.hp > 0) & (y.hp > 0))
-      a = [x,y].shuffle
-      puts "== Turn #{ind} =="
-
-      attack(a[0], a[1])
-
-      ind = ind + 1
-    end
-
-    winner(a[0],a[1])
+  def self.shuffle(hero1, hero2)
+    a = [hero1,hero2].shuffle
+    attacker = a[0]
+    defender = a[1]
+    attack(attacker,defender)
   end
 
   def self.attack(attacker, defender)
@@ -96,6 +68,40 @@ class Mode
     puts "********************"
     puts "#{winner} won!      "
     puts "********************"
+  end
+end
+
+class DeathMatch < Mode
+  def self.run(attacker,defender)
+  # Whoever dies first loses
+
+    while (attacker.hp > 0) & (defender.hp > 0)
+      shuffle(attacker,defender)
+    end
+
+    winner(attacker,defender)
+  end
+end
+
+class TurnBased < Mode
+  def self.run(attacker, defender)
+  # Whoever has the highest HP after x number of turns wins. If someone dies before the final turn, the game shall end with the survivor being the winner.
+
+    index = 1
+    no_of_turns = 5
+    turns = no_of_turns +1
+
+    puts ""
+
+    while (index < turns) & ((attacker.hp > 0) & (defender.hp > 0))
+      puts "== Turn #{index} =="
+
+      shuffle(attacker, defender)
+
+      index = index + 1
+    end
+
+    winner(attacker,defender)
   end
 end
 
