@@ -1,11 +1,11 @@
 require 'spec_helper'
-require 'Duel'
+require_relative '../../lib/deathmatch'
 
 describe DeathMatch do
   # Death Match
   describe ".run" do
     it "it should have a dead player" do
-      
+
       puts "DEATH MATCH TEST"
 
       w = Warrior.new

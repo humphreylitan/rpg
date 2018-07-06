@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'Duel'
+require_relative '../../lib/mage'
 
 describe Mage do
   describe "#initialize" do

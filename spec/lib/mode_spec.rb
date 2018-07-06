@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'Duel'
+require_relative '../../lib/mode'
 
 describe Mode do
   # Shuffle

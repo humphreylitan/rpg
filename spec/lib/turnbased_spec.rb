@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'Duel'
+require_relative '../../lib/turnbased'
 
 describe TurnBased do
   # Turn Based
